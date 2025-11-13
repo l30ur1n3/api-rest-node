@@ -1,0 +1,20 @@
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import userRoutes from "./routes/userRoutes.js";
+import { swaggerDocs } from "./swagger.js";
+
+dotenv.config();
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+app.use("/api/users", userRoutes);
+
+swaggerDocs(app);
+
+app.get("/", (req, res) => res.send("API RESTful Node.js está online 🚀"));
+
+export default app;
